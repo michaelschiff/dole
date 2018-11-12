@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_package = "com.michaelschiff.dole";
+option java_outer_classname = "DoleProto";
+option java_multiple_files = true;
+option java_generate_equals_and_hash = true;
+
+package dole;
+
+message DoleRequest {}
+
+message InitialRecord {
+    // Main portion of idempotency key
+    string key = 1;
+    // Offset portion of idempotency key
+    int64 offset = 2;
+}
+
+message Record {
+    oneof record_oneof {
+        InitialRecord initial_record = 1;
+        bytes record = 2;
+
+    }
+}
